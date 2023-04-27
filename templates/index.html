@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Series Graphs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background: url("static/bg_galaxy.jpeg");
+        background-size: cover;
+        font-family: 'Roboto', sans-serif;
+        color: #fff;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      h1 {
+        font-size: 48px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px #000;
+      }
+      p {
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 30px;
+        line-height: 1.5;
+        text-align: justify;
+      }
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+      }
+	  .btn {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+      }
+      .btn-container .btn {
+        padding: 10px 20px;
+        margin-right: 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .btn-container .btn:last-child {
+        margin-right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Time Series Graphs</h1>
+      <p>Understanding space weather is crucial for predicting and mitigating its impacts on our technology and infrastructure. Two important datasets that provide insights into different aspects of space weather are the Outer Space dataset and the Ionosphere dataset. The Outer Space dataset measures the magnetic field of the sun, which has a significant impact on the space environment around Earth. The Ionosphere dataset measures the energy level of electrons and protons in the upper atmosphere, taking into account the flux of these particles that is constantly bombarding our planet. By analyzing these datasets over time, scientists can gain a better understanding of the dynamics of space weather and make more accurate predictions about its effects on Earth. Below given are the two areas for which we can view the comprehensive time series data and make necessary predictions on them</p>
+      <div class="btn-container">
+        <a href="{{ url_for('outerspace', col_name='TOTUSJH') }}" class="btn">Outer Space</a>
+        <a href="{{ url_for('ionosphere', col_name='satellite') }}" class="btn">Ionosphere</a>
+      </div>
+    </div>
+  </body>
+</html>
