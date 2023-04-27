@@ -28,7 +28,7 @@ def load_data(filename):
 def initialize_database1():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    c.execute('CREATE TABLE IF NOT EXISTS data3 (time_tag TEXT, satellite TEXT, flux REAL, energy REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS data2 (time_tag TEXT, satellite TEXT, flux REAL, energy REAL)')
     conn.commit()
     conn.close()
 
@@ -41,7 +41,7 @@ def load_data1(filename):
         next(reader)  # skip header row
         for row in reader:
             # Insert data into the table
-            c.execute("INSERT INTO data3 (time_tag, flux, satellite, energy) VALUES (?, ?, ?, ?)",
+            c.execute("INSERT INTO data2 (time_tag, flux, satellite, energy) VALUES (?, ?, ?, ?)",
                       (row[0],row[1],row[2],row[3]
 ))
         conn.commit()
@@ -49,5 +49,5 @@ def load_data1(filename):
     conn.close()
 
 initialize_database1()
-load_data1('differential-electrons-3-day.csv')
+load_data1('ionosphere_final.csv')
 

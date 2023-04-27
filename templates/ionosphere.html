@@ -7,7 +7,16 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<!-- Custom CSS -->
 	<style>
-		
+		.spacer {
+			padding: 10px;
+			max-width: 1px;
+		}
+		.button-div {
+			position: relative;
+			left: 30%;
+			padding-top: 10px;
+			max-width: 400px;
+		}
 
 		body {
 			background-image: url("/static/ionosphere.jpeg");
@@ -53,6 +62,10 @@
 <body>
 	<!-- Sidebar -->
 	<div class="sidebar">
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="navbar-brand" href="/">Home</a>
+		</nav>
+		<div class="spacer"></div>
 		<nav class="navbar navbar-dark">
 			<a class="navbar-brand" href="#">Ionosphere</a>
 			<ul class="navbar-nav flex-column">
@@ -71,19 +84,6 @@
 		</nav>
 	</div>
 	<!-- Main content -->
-	<div class="dropdown float-right" style="margin-top: 10px;">
-		<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
-			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Forecast
-		</button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			<a class="dropdown-item" href="#">12 Minutes</a>
-			<a class="dropdown-item" href="#">24 Minutes</a>
-			<a class="dropdown-item" href="#">36 Minutes</a>
-			<a class="dropdown-item" href="#">48 Minutes</a>
-			<a class="dropdown-item" href="#">1 hour</a>
-		</div>
-	</div>
 	<div class="content">
 		<!-- Forecast Button with Dropdown -->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -116,7 +116,8 @@
 				<span class="carousel-control-next-icon"></span>
 			</a>
 		</div>
-
+		<div class="button-div"><a href="{{ url_for('projection_in') }}" class="btn btn-primary btn-lg" type="button" style="float: center;">Forecast
+			next 24 hours</a></div>
 		<script>
 			$(document).ready(function () {
 				// Activate carousel

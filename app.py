@@ -3,10 +3,8 @@ import sqlite3
 from datetime import datetime
 import matplotlib.pyplot as plt
 import numpy as np
-import datetime
-import random
-import pickle
 import pandas as pd
+import shutil
 
 
 app = Flask(__name__)
@@ -53,7 +51,7 @@ def outerspace(col_name):
     plt.plot(x, y)
 
     plt.title(f'Time Series Plot of {col_name}')
-    plt.xticks(range(0, len(x), 70))
+    plt.xticks(x[::70],x[::70])
     plt.xlabel('Date-Time')
     plt.ylabel(col_name)
     plt.savefig('static/plot1.png')
@@ -68,11 +66,34 @@ def outerspace(col_name):
     ax2.set_ylabel('Seasonal')
     ax3.plot(result[2])
     ax3.set_ylabel('Residual')
-    plt.tight_layout()
+
     plt.savefig('static/plot2.png')
 
 
     return render_template('outerspace.html')
+
+@app.route('/outerspace/projection')
+def projection_out():
+    global current_col
+    source_path = f'static/{current_col}.png'
+    destination_path = 'static/plot1.png'
+    shutil.copyfile(source_path, destination_path)
+
+    return render_template('outerspace.html')
+
+@app.route('/ionosphere/projection')
+def projection_in():
+    global current_col
+    x = ''
+    if current_col == 'satellite':
+        x = 'flux'
+    else:
+        x = 'energy'
+    source_path = f'static/{x}.png'
+    destination_path = 'static/plot1.png'
+    shutil.copyfile(source_path, destination_path)
+
+    return render_template('ionosphere.html')
 
 
 @app.route('/ionosphere/<col_name>')
@@ -81,7 +102,7 @@ def ionosphere(col_name):
     global current_col
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    c.execute(f"SELECT time_tag,{col_name} FROM data1")
+    c.execute(f"SELECT time_tag,{col_name} FROM data2")
     data = c.fetchall()
     conn.close()
 
@@ -105,12 +126,14 @@ def ionosphere(col_name):
         for e in y:
             y_final.append(float(e))
 
+    if col_name =='satellite':
+        col_nam = 'flux'
+
     plt.figure(figsize=(10, 8))
     plt.plot(x, y_final)
     plt.title(f'Time Series Plot of Electron Flux')
-    plt.xticks(x[::700], x[::700])
+    plt.xticks(x[::50], x[::50])
     plt.xlabel('Date-Time')
-    plt.ylabel(col_name)
     plt.savefig('static/plot1.png')
 
     result = seasonal_decompose(np.array(y_final))
