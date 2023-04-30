@@ -62,7 +62,7 @@ def ionosphere_SARIMA():
 
     for c in dict_.keys():
         start_index = len(df)
-        end_index = start_index + 288 # 288 time steps is equivalent to 1 day according to 12T frequency
+        end_index = start_index + 288 # 288 time steps is equivalent to 1 day according to 5T frequency
 
         predictions = dict_[c].predict(start=start_index, end=end_index, typ='levels')
         fig = plt.figure()
